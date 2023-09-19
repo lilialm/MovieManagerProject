@@ -2,6 +2,7 @@ package filmes;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 import filmes.model.FilmeNacional;
 import filmes.controller.FilmeController;
@@ -76,9 +77,24 @@ public class Menu {
 			System.out.println("Digite o idioma do filme: ");
 			idioma = ler.nextLine();
 			
-			filmes.adicionarFilme(new FilmeNacional(titulo, genero, anoLancamento, diretor, idioma));
+			Optional<String> checaTituloNac = Optional.ofNullable(titulo);
+			Optional<String> checaGeneroNac = Optional.ofNullable(genero);
+			Optional<String> checaDiretorNac = Optional.ofNullable(diretor);
+			Optional<String> checaIdioma = Optional.ofNullable(idioma);
+			
+		
+			if ( checaTituloNac.get().isBlank() ||
+				     checaGeneroNac.get().isBlank() ||
+				     checaDiretorNac.get().isBlank() ||
+				     checaIdioma.get().isBlank()) {
+	            throw new IllegalArgumentException("Não pode enviar nenhum campo em branco");
+	        } 
+	        	filmes.adicionarFilme(new FilmeNacional(titulo, genero, anoLancamento, diretor, idioma));
+	        	keyPress();
+	        
+			
             
-			keyPress();
+			
             break;
 		case 2: 
             System.out.print("Adicionar filme internacional - ");
@@ -98,6 +114,18 @@ public class Menu {
 			
 			System.out.println("Digite o país de origem do filme: ");
 			paisOrigem = ler.nextLine();
+			
+			Optional<String> checaTituloInt = Optional.ofNullable(titulo);
+			Optional<String> checaGeneroInt = Optional.ofNullable(genero);
+			Optional<String> checaDiretorInt = Optional.ofNullable(diretor);
+			Optional<String> checaPaisOrigem = Optional.ofNullable(paisOrigem);
+			
+			if ( checaTituloInt.get().isBlank() ||
+				     checaGeneroInt.get().isBlank() ||
+				     checaDiretorInt.get().isBlank() ||
+				     checaPaisOrigem.get().isBlank()) {
+	            throw new IllegalArgumentException("Não pode enviar nenhum campo em branco");
+	        } 
 			
 			filmes.adicionarFilme(new FilmeInternacional(titulo, genero, anoLancamento, diretor, paisOrigem));
 			
@@ -221,6 +249,9 @@ public class Menu {
 			System.out.println("Você pressionou uma tecla diferente de enter!");
 
 		}
+		
+		
+        
 	}
 	}
 		
