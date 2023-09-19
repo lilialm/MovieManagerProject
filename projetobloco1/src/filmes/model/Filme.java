@@ -13,7 +13,6 @@ public abstract class Filme {
 		this.genero = genero;
 		this.anoLancamento = anoLancamento;
 		this.diretor = diretor;
-		this.rating = rating;
 	}
 
 
